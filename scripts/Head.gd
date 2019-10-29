@@ -26,17 +26,17 @@ func movement():
 			LEFT = false
 			UP = false
 			DOWN = false
-		if Input.is_action_pressed("ui_left") and !RIGHT:
+		elif Input.is_action_pressed("ui_left") and !RIGHT:
 			LEFT =  true
 			RIGHT = false
 			UP = false
 			DOWN = false			
-		if Input.is_action_pressed("ui_up") and !DOWN:
+		elif Input.is_action_pressed("ui_up") and !DOWN:
 			UP = true
 			RIGHT = false
 			LEFT = false
 			DOWN = false
-		if Input.is_action_pressed("ui_down") and !UP:
+		elif Input.is_action_pressed("ui_down") and !UP:
 			DOWN = true
 			RIGHT = false
 			LEFT = false
@@ -93,7 +93,9 @@ func kill():
 						started = false
 						$Death.start()
 						$Move_Delay.stop()
-					
+						var lenght = get_parent().get_child_count() - 1
+						for i in range(lenght, 0, -1):
+							get_parent().get_child(i).queue_free()
 
-func _on_Death_timeout():
+func _on_Death_timeout():	
 	get_tree().reload_current_scene()

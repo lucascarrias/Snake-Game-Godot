@@ -39,7 +39,7 @@ func move_segments(head_pos):
 	add_segment(last_pos)
 
 func move_body():
-	$Head.set_Timer_move($Head.move_delay)
+	$Head.set_Timer_move($Head.move_delay/(1+score/50.0))
 	$Head.movement()
 	if $Head.started and $Head.move:
 		move_segments($Head.global_position)
