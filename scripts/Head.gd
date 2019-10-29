@@ -64,6 +64,7 @@ func move(direction):
 		started = false		
 		$Death.start()
 		get_parent().set_physics_process(false)
+		change_color()
 		return Vector2(0,0)
 
 func _on_Move_Delay_timeout():
@@ -90,12 +91,20 @@ func kill():
 				var part = get_parent().get_child(i)
 				if part.name != self.name:
 					if part.global_position == global_position:
+						change_color()
 						started = false
 						$Death.start()
 						$Move_Delay.stop()
-						var lenght = get_parent().get_child_count() - 1
-						for i in range(lenght, 0, -1):
-							get_parent().get_child(i).queue_free()
+						
 
 func _on_Death_timeout():	
 	get_tree().reload_current_scene()
+
+func shrink():
+	var lenght = get_parent().get_child_count() - 1
+	for i in range(lenght, 0, -1):
+		get_parent().get_child(i).queue_free()
+
+func change_color():
+	z_index = 2
+	modulate = Color(1,0.5,0,1)
